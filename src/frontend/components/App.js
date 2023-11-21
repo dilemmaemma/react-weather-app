@@ -1,1 +1,0 @@
-// Make sure to download Moment!
