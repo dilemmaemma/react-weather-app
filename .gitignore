@@ -1,3 +1,9 @@
 node_modules
 env
 .env
+package-lock.json
+eslintrc
+.eslintrc
+gitignore
+.gitignore
+webpack.config.js
