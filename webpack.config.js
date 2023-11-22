@@ -15,7 +15,7 @@ const SERVER_URL = /http:\/\/localhost:9000/g
 const FRONTEND_PORT = 3000
 
 const INDEX_HTML_PATH = './public/index.html'
-const INDEX_JS_PATH = './src/frontend/index.jsx'
+const INDEX_JS_PATH = './src/frontend/index.js'
 const DIST_FOLDER = 'dist'
 const BUNDLE_FILE = 'index.js'
 

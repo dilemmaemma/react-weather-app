@@ -6,4 +6,3 @@ eslintrc
 .eslintrc
 gitignore
 .gitignore
-webpack.config.js
