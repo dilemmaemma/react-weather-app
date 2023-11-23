@@ -3,9 +3,6 @@ import axios from 'axios';
 import moment from 'moment';
 import countryList from '../data/countries';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 const App = () => {
     const now = moment().format('MMMM Do YYYY, h:mm:ss a');
     const [city, setCity] = useState('');

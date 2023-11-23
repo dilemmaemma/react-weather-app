@@ -4,7 +4,6 @@ const path = require('path')
 const DEVELOPMENT = 'development'
 const ENV = process.env.NODE_ENV || DEVELOPMENT
 const IS_DEV = ENV === DEVELOPMENT
-const Dotenv = require('dotenv-webpack');
 
 const HTML_LOADER = 'html-loader'
 const STYLE_LOADER = 'style-loader'
@@ -35,21 +34,12 @@ const config = {
     new HtmlWebpackPlugin({
       template: INDEX_HTML_PATH,
     }),
-    new Dotenv(),
   ],
   devServer: {
     static: path.join(__dirname, DIST_FOLDER),
     historyApiFallback: true,
     compress: true,
     port: FRONTEND_PORT,
-  },
-  resolve: {
-    fallback: {
-      path: require.resolve("path-browserify"),
-      os: require.resolve("os-browserify/browser"),
-      crypto: require.resolve("crypto-browserify"),
-      stream: require.resolve('stream-browserify'),
-    }
   },
   module: {
     rules: [
