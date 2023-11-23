@@ -12,28 +12,36 @@ const App = () => {
     const [units, setUnits] = useState('standard');
     const [lang, setLang] = useState('en');
 
-    const setCntry = (e) => {
+    const setCntry = async (e) => {
         const selectedCountryCode = e.target.value;
         const selectedCountry = countryList[selectedCountryCode];
     
         if (selectedCountry) {
-            setCountry(selectedCountry.name);
+            setCountry(selectedCountry);
             setCountryId(selectedCountryCode);
         } else {
             // Handle the case when selectedCountry is undefined
             setCountry('');
             setCountryId('');
         }
-    };
-    
+    }
 
     useEffect(() => {
         console.log(country, countryId);
     }, [country, countryId]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(city, state, countryId, units, lang);
+
+        try {
+            const response = await axios.get(`/api/weather`, {
+                params: { city, state, country },
+              });
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
     };
 
     const handleReset = () => {
