@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import countryList from '../data/countries';
@@ -15,12 +15,21 @@ const App = () => {
     const setCntry = (e) => {
         const selectedCountryCode = e.target.value;
         const selectedCountry = countryList[selectedCountryCode];
-
-        setCountry(selectedCountry.name);
-        setCountryId(selectedCountryCode);
-
-        console.log(country, countryId);
+    
+        if (selectedCountry) {
+            setCountry(selectedCountry.name);
+            setCountryId(selectedCountryCode);
+        } else {
+            // Handle the case when selectedCountry is undefined
+            setCountry('');
+            setCountryId('');
+        }
     };
+    
+
+    useEffect(() => {
+        console.log(country, countryId);
+    }, [country, countryId]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,11 +50,18 @@ const App = () => {
             <form onSubmit={handleSubmit} onReset={handleReset}>
                 <div>
                     <label htmlFor='country'>Country: </label>
-                    <select id='country' onChange={setCntry}>
+                    <select
+                        id='country'
+                        onChange={setCntry}
+                        required={true}
+                        value={countryId}
+                    >
+                        <option value={''}>Select a Country</option>
                         {Object.entries(countryList).map(([code, country]) => (
                             <option key={code} value={code}>{country}</option>
                         ))}
                     </select>
+
                 </div>
                 {
                     <div>
