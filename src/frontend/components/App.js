@@ -3,6 +3,9 @@ import axios from 'axios';
 import moment from 'moment';
 import countryList from '../data/countries';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const App = () => {
     const now = moment().format('MMMM Do YYYY, h:mm:ss a');
     const [city, setCity] = useState('');
@@ -34,14 +37,13 @@ const App = () => {
         e.preventDefault();
         console.log(city, state, countryId, units, lang);
 
-        try {
-            const response = await axios.get(`/api/weather`, {
-                params: { city, state, country },
-              });
-            console.log(response.data);
-          } catch (error) {
-            console.error(error);
-          }
+        axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${countryId}&limit=5&appid=${process.env.REACT_APP_API_APPID}`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.error(err);
+            })
     };
 
     const handleReset = () => {
